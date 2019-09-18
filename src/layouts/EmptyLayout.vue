@@ -4,7 +4,7 @@
       <v-container class="fill-height" fluid>
         <v-row align="center" justify="center">
           <v-col cols="12" sm="8" md="4">
-            <router-view/>
+            <router-view />
           </v-col>
         </v-row>
       </v-container>
@@ -13,12 +13,5 @@
 </template>
 
 <script>
-import Login from "@/views/Login";
-import Register from "@/views/Register";
-export default {
-  components: {
-    Login,
-    Register
-  }
-};
+export default {};
 </script>
