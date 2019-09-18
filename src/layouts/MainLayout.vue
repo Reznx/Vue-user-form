@@ -4,8 +4,8 @@
       <v-toolbar-title>Application</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <div class="my-2">
-        <v-btn to="/login" small color="primary">Войти</v-btn>
-        <v-btn to="/login" small color="primary">Выйти</v-btn>
+        <v-btn to="/login" small color="primary" v-if="!isLoggedIn">Войти</v-btn>
+        <v-btn small color="primary" @click="logout" v-else>Выйти</v-btn>
       </div>
     </v-app-bar>
 
@@ -26,7 +26,17 @@
 
 <script>
 export default {
-  name: "main-layout",
-  data: () => ({})
+  computed: {
+    isLoggedIn: function() {
+      return this.$store.getters.isLoggedIn;
+    }
+  },
+  methods: {
+    logout: function() {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
+    }
+  }
 };
 </script>
