@@ -1,36 +1,27 @@
 <template>
-  <v-app>
-    <v-app-bar app>
-      <v-toolbar-title class="headline text-uppercase">
-        <span>Vuetify</span>
-        <span class="font-weight-light">MATERIAL DESIGN</span>
-      </v-toolbar-title>
-      <v-spacer></v-spacer>
-      <v-btn
-        text
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-      >
-        <span class="mr-2">Latest Release</span>
-      </v-btn>
-    </v-app-bar>
-
-    <v-content>
-      <HelloWorld/>
-    </v-content>
-  </v-app>
+  <div id="app">
+    <component :is="layout">
+      <router-view />
+    </component>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld';
-
+import EmptyLayout from "@/layouts/EmptyLayout";
+import MainLayout from "@/layouts/MainLayout";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld,
+  name: "App",
+  computed: {
+    layout() {
+      return (this.$route.meta.layout || "empty") + "-layout";
+    }
   },
-  data: () => ({
-    //
-  }),
+  components: {
+    EmptyLayout,
+    MainLayout
+  }
 };
 </script>
+
+<style>
+</style>
