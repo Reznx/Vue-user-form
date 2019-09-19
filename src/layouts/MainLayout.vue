@@ -3,9 +3,14 @@
     <v-app-bar app color="indigo" dark>
       <v-toolbar-title>Application</v-toolbar-title>
       <div class="flex-grow-1"></div>
+      <div class="my-2" v-if="isLoggedIn">
+        <v-btn small color="primary" @click="logout">Выйти</v-btn>
+      </div>
+      <div class="my-2" v-else>
+        <v-btn to="/login" small color="primary">Войти</v-btn>
+      </div>
       <div class="my-2">
-        <v-btn to="/login" small color="primary" v-if="!isLoggedIn">Войти</v-btn>
-        <v-btn small color="primary" @click="logout" v-else>Выйти</v-btn>
+        <v-btn small color="primary" @click="infoInfo">Войти</v-btn>
       </div>
     </v-app-bar>
 
@@ -27,16 +32,23 @@
 <script>
 export default {
   computed: {
-    isLoggedIn: function() {
+    isLoggedIn() {
       return this.$store.getters.isLoggedIn;
     }
   },
+
   methods: {
-    logout: function() {
+    logout() {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/login");
       });
+    },
+    infoInfo() {
+      console.log(JSON.parse(JSON.stringify(this.$store.state.info)));
     }
+  },
+  async created() {
+    await this.$store.dispatch("about");
   }
 };
 </script>

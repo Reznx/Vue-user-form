@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     status: "",
     token: localStorage.getItem("token") || "",
-    user: {}
+    user: {},
+    info: "123test"
   },
   mutations: {
     auth_request(state) {
@@ -25,6 +26,9 @@ export default new Vuex.Store({
     logout(state) {
       state.status = "";
       state.token = "";
+    },
+    setInfo(state, info) {
+      state.info = info;
     }
   },
   actions: {
@@ -74,8 +78,24 @@ export default new Vuex.Store({
           });
       });
     },
+    async about({ commit }) {
+      try {
+        await axios
+          .get("http://localhost:3000/about/", {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`
+            }
+          })
+          .then(response => {
+            const info = response.data.data;
+            commit("setInfo", info);
+          });
+      } catch (e) {
+        console.log(error);
+      }
+    },
     logout({ commit }) {
-      return new Promise((resolve, reject) => {
+      return new Promise(resolve => {
         commit("logout");
         localStorage.removeItem("token");
         delete axios.defaults.headers.common["Authorization"];
@@ -85,6 +105,7 @@ export default new Vuex.Store({
   },
   getters: {
     isLoggedIn: state => !!state.token,
-    authStatus: state => state.status
+    authStatus: state => state.status,
+    info: state => state.info
   }
 });
