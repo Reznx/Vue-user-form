@@ -9,9 +9,6 @@
       <div class="my-2" v-else>
         <v-btn to="/login" small color="primary">Войти</v-btn>
       </div>
-      <div class="my-2">
-        <v-btn small color="primary" @click="infoInfo">Войти</v-btn>
-      </div>
     </v-app-bar>
 
     <v-content>
@@ -42,9 +39,6 @@ export default {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/login");
       });
-    },
-    infoInfo() {
-      console.log(JSON.parse(JSON.stringify(this.$store.state.info)));
     }
   },
   async created() {

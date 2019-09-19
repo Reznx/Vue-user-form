@@ -5,7 +5,7 @@
       <v-spacer></v-spacer>
     </v-toolbar>
     <v-card-text>
-      <v-form @submit.prevent="register" id="check-login-form">
+      <v-form @submit.prevent="login" id="check-login-form">
         <v-text-field id="username" v-model="username" placeholder="Логин"></v-text-field>
         <v-text-field id="password" v-model="password" placeholder="Пароль" type="password"></v-text-field>
       </v-form>
@@ -27,13 +27,16 @@ export default {
     password: ""
   }),
   methods: {
-    register() {
-      let username = this.username;
-      let password = this.password;
-      this.$store
-        .dispatch("login", { username, password })
-        .then(() => this.$router.push("/"))
-        .catch(err => console.log(err));
+    login() {
+      try {
+        let username = this.username;
+        let password = this.password;
+        this.$store
+          .dispatch("login", { username, password })
+          .then(() => this.$router.push("/"));
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };

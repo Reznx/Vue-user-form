@@ -27,14 +27,16 @@ export default {
     password: ""
   }),
   methods: {
-    login() {
-      let username = this.username;
-      let password = this.password;
+    async login() {
+      try {
+        let username = this.username;
+        let password = this.password;
 
-      this.$store
-        .dispatch("register", { username, password })
-        .then(() => this.$router.push("/"))
-        .catch(err => console.log(err));
+        await this.$store.dispatch("register", { username, password });
+        this.$router.push("/");
+      } catch (e) {
+        console.error(e);
+      }
     }
   }
 };

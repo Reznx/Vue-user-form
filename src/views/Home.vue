@@ -1,22 +1,25 @@
 <template>
-  <v-card max-width="344" class="mx-auto">
-    <v-card-title v-if="info">{{info}}</v-card-title>
-    <v-card-text>О пользователе</v-card-text>
-    <div class="flex-grow-1"></div>
+  <v-card class="mx-auto" max-width="344" outlined>
+    <v-list-item three-line v-if="isLoggedIn">
+      <v-list-item-content>
+        <v-list-item-title class="headline mb-1">{{info.username}}</v-list-item-title>
+        <v-list-item-subtitle>{{info.about}}</v-list-item-subtitle>
+      </v-list-item-content>
+
+      <v-list-item-avatar tile size="80" color="grey">
+        <v-img :src="info.avatar"></v-img>
+      </v-list-item-avatar>
+    </v-list-item>
+    <v-title v-else>Войдите в систему</v-title>
   </v-card>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
-import { mapState } from "vuex";
 export default {
   computed: {
-    ...mapState(["info"])
-  },
-  methods: {
-    userInfo() {
-      console.log(info);
-    }
+    ...mapGetters(["info", "isLoggedIn"])
   }
 };
-<script />;
+</script>;
+
