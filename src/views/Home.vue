@@ -10,7 +10,7 @@
         <v-img :src="info.avatar"></v-img>
       </v-list-item-avatar>
     </v-list-item>
-    <v-title v-else>Войдите в систему</v-title>
+    <v-list-item-title v-else>Войдите в систему</v-list-item-title>
   </v-card>
 </template>
 

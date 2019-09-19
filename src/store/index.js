@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import axios from "axios";
+import about from "./about.module";
 
 Vue.use(Vuex);
 
@@ -65,19 +66,7 @@ export default new Vuex.Store({
         localStorage.removeItem("token");
       }
     },
-    async about({ commit }) {
-      try {
-        const { data } = await axios.get("http://localhost:3000/about/", {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`
-          }
-        });
-        const info = data.data;
-        commit("setInfo", info);
-      } catch (e) {
-        console.error(e);
-      }
-    },
+
     logout({ commit }) {
       try {
         commit("logout");
@@ -92,5 +81,8 @@ export default new Vuex.Store({
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
     info: state => state.info
+  },
+  modules: {
+    about
   }
 });
