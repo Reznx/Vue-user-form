@@ -44,11 +44,6 @@ export default {
       });
     }
   },
-  watch: {
-    error() {
-      this.error("Что-то пошло не так");
-    }
-  },
   async created() {
     await this.$store.dispatch("about");
   }
