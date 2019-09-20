@@ -10,7 +10,8 @@ export default new Vuex.Store({
     status: "",
     token: localStorage.getItem("token") || "",
     user: {},
-    info: []
+    info: [],
+    error: null
   },
   mutations: {
     authSuccess(state, token, user) {
@@ -27,6 +28,9 @@ export default new Vuex.Store({
     },
     setInfo(state, info) {
       state.info = info;
+    },
+    setError(state, error) {
+      state.error = error;
     }
   },
   actions: {
@@ -44,8 +48,9 @@ export default new Vuex.Store({
           commit("authSuccess", token, user);
         });
       } catch (e) {
-        commit("authError");
+        commit("setError", e);
         localStorage.removeItem("token");
+        throw e;
       }
     },
 
@@ -63,8 +68,9 @@ export default new Vuex.Store({
           commit("authSuccess", token, user);
         });
       } catch (e) {
-        commit("authError");
+        commit("setError", e);
         localStorage.removeItem("token");
+        throw e;
       }
     },
 
@@ -74,7 +80,8 @@ export default new Vuex.Store({
         localStorage.removeItem("token");
         delete axios.defaults.headers.common["Authorization"];
       } catch (e) {
-        console.error(e);
+        commit("setError", e);
+        throw e;
       }
     }
   },
@@ -82,7 +89,8 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
-    info: state => state.info
+    info: state => state.info,
+    error: s => s.error
   },
   modules: {
     about

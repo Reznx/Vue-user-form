@@ -31,6 +31,9 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
+    },
+    error() {
+      return this.$store.getters.error;
     }
   },
 
@@ -39,6 +42,11 @@ export default {
       this.$store.dispatch("logout").then(() => {
         this.$router.push("/login?message=logout");
       });
+    }
+  },
+  watch: {
+    error() {
+      this.error("Что-то пошло не так");
     }
   },
   async created() {

@@ -11,6 +11,32 @@
     </v-content>
     <v-footer color="indigo" app>
       <span class="white--text">&copy; 2019</span>
+      <div class="text-center ma-2">
+        <v-snackbar v-model="snackbar">
+          {{ error }}
+          <v-btn color="pink" text @click="snackbar = false">Close</v-btn>
+        </v-snackbar>
+      </div>
     </v-footer>
   </v-app>
 </template>
+
+<script>
+import { mapState } from "vuex";
+export default {
+  data: () => ({
+    snackbar: false,
+    text: "Hello, I'm a snackbar"
+  }),
+  computed: {
+    ...mapState(["error"])
+  },
+  watch: {
+    error() {
+      if (this.error) {
+        (this.test = this.error), (this.snackbar = !!this.error);
+      }
+    }
+  }
+};
+</script>

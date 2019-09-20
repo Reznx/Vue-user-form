@@ -6,8 +6,8 @@
     </v-toolbar>
     <v-card-text>
       <v-form @submit.prevent="login" id="check-login-form">
-        <v-text-field id="username" v-model="username" placeholder="Логин"></v-text-field>
-        <v-text-field id="password" v-model="password" placeholder="Пароль" type="password"></v-text-field>
+        <v-text-field id="username" v-model="username" placeholder="Логин" />
+        <v-text-field id="password" v-model="password" placeholder="Пароль" type="password" />
       </v-form>
     </v-card-text>
     <v-card-actions>

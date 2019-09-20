@@ -12,7 +12,8 @@ export default {
         const info = data.data;
         commit("setInfo", info);
       } catch (e) {
-        console.error(e);
+        commit("setError", e);
+        localStorage.removeItem("token");
       }
     }
   }
