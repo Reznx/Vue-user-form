@@ -7,7 +7,6 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    status: "",
     token: localStorage.getItem("token") || "",
     user: {},
     info: [],
@@ -15,15 +14,10 @@ export default new Vuex.Store({
   },
   mutations: {
     authSuccess(state, token, user) {
-      state.status = "success";
       state.token = token;
       state.user = user;
     },
-    authError(state) {
-      state.status = "error";
-    },
     logout(state) {
-      state.status = "";
       state.token = "";
     },
     setInfo(state, info) {
