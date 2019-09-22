@@ -25,8 +25,7 @@
 import { mapState } from "vuex";
 export default {
   data: () => ({
-    snackbar: false,
-    text: "Hello, I'm a snackbar"
+    snackbar: false
   }),
   computed: {
     ...mapState(["error"])
@@ -34,7 +33,7 @@ export default {
   watch: {
     error() {
       if (this.error) {
-        (this.test = this.error), (this.snackbar = !!this.error);
+        this.snackbar = !!this.error;
       }
     }
   }

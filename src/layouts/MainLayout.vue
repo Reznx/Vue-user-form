@@ -31,9 +31,6 @@ export default {
   computed: {
     isLoggedIn() {
       return this.$store.getters.isLoggedIn;
-    },
-    error() {
-      return this.$store.getters.error;
     }
   },
 
